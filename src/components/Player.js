@@ -51,6 +51,7 @@ export default class Player extends Component {
     switch(e.which) {
       case SPACE:
         if(this.onGround) {
+          this.onGround = 0
           Matter.Body.applyForce(
             body,
             { x: body.position.x, y: body.position.y },
