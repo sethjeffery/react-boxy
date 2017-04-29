@@ -1,5 +1,3 @@
-export const TURN_LEFT = 'TURN_LEFT'
-export const TURN_RIGHT = 'TURN_RIGHT'
 export const KEY_UP = 'KEY_UP'
 export const KEY_DOWN = 'KEY_DOWN'
 export const UPDATE_PLAYER = 'UPDATE_PLAYER'
@@ -9,18 +7,6 @@ export const END_GAME = 'END_GAME'
 export const INITIAL = 'INITIAL'
 export const PLAYING = 'PLAYING'
 export const GAME_OVER = 'GAME_OVER'
-
-export const turnLeft = () => {
-  return {
-    type: TURN_LEFT
-  }
-}
-
-export const turnRight = () => {
-  return {
-    type: TURN_RIGHT
-  }
-}
 
 export const updatePlayer = props => {
   return {

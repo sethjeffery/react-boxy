@@ -7,7 +7,5 @@ export default connect(
       platforms: state.app.level.platforms
     }
   },
-  function mapDispatchToProps(state) {
-    return {}
-  }
+  undefined
 )(Platforms)

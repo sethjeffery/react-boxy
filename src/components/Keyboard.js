@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 export default class Keyboard extends Component {
   static propTypes = {
-    engine: PropTypes.object,
-    scale: PropTypes.number,
+    onKeyDown: PropTypes.func.isRequired,
+    onKeyUp: PropTypes.func.isRequired
   }
 
   componentDidMount() {

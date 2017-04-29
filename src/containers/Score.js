@@ -7,8 +7,5 @@ export default connect(
       score: state.app.level.stageLevel
     }
   },
-  function mapDispatchToProps(dispatch) {
-    return {
-    }
-  }
+  undefined
 )(Score)

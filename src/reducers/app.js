@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux'
 import {
-  TURN_LEFT,
-  TURN_RIGHT,
   UPDATE_PLAYER,
   KEY_DOWN,
   KEY_UP,
@@ -52,10 +50,6 @@ const player = (state = playerDefault, action) => {
   switch(action.type) {
     case START_GAME:
       return { ...playerDefault }
-    case TURN_LEFT:
-      return { ...state, angle: state.angle - 10 }
-    case TURN_RIGHT:
-      return { ...state, angle: state.angle + 10 }
     case UPDATE_PLAYER:
       const props = action.props
       return { ...state, ...props }

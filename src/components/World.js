@@ -15,7 +15,7 @@ export default class World extends Component {
 
   render() {
     return (
-      <MatterWorld gravity={{ x: 0, y: 2 }} ref={ref => {this.world = ref}}>
+      <MatterWorld gravity={{ x: 0, y: 2 }}>
         <Player />
         <Keyboard />
         <Platforms />
