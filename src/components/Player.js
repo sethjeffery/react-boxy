@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Matter, { World, Bodies } from 'matter-js'
 import PropTypes from 'prop-types'
 import BoxSprite from './box-sprite.png'
-import Composite from './Composite'
 
 const SPACE = 32
 const CURSOR_LEFT = 37
@@ -32,6 +31,7 @@ export default class Player extends Component {
 
     this.body = Bodies.rectangle(x, y, 40, 40, {
       mass: 9,
+      angle,
       collisionFilter: { group: 1 },
       friction: 1,
       frictionAir: 0.05,
@@ -55,10 +55,6 @@ export default class Player extends Component {
       default:
         return
     }
-  }
-
-  onKeyUp = e => {
-
   }
 
   isKeyDown = key => {
@@ -134,23 +130,9 @@ export default class Player extends Component {
     World.remove(this.context.engine.world, this.body);
   }
 
-  wrapperStyles() {
-    const { x, y } = this.props.player.position
-    const angle = 0
-
-    return {
-      position: 'absolute',
-      width: '40px',
-      height: '40px',
-      margin: '-20px',
-      transform: `translateX(${x}px) translateY(${y}px) rotate(${angle}deg)`,
-      transformOrigin: 'center'
-    }
-  }
-
   render() {
     return (
-      <div style={this.wrapperStyles()}></div>
+      <span></span>
     )
   }
 }
