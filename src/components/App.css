@@ -1,0 +1,45 @@
+.Game {
+  margin: auto;
+  text-align: center;
+}
+
+.canvas, canvas {
+  width: 800px;
+  height: 600px;
+  border-radius: 4px;
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+#debug {
+  margin-bottom: 1rem;
+}
+
+.info {
+  text-align: center;
+  margin: 1rem 0;
+  color: white;
+}
+
+#Game > div {
+  display: none;
+}
+
+button {
+  background-color: transparent;
+  border: solid 2px white;
+  color: white;
+  border-radius: 4px;
+  font: 18px sans-serif;
+  text-transform: uppercase;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+button:hover, button:focus {
+  background-color: rgba(255,255,255,0.2);
+}
