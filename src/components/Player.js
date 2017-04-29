@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Matter, { World, Bodies, Body, Composite } from 'matter-js'
+import Matter, { World, Bodies } from 'matter-js'
 import PropTypes from 'prop-types'
 import BoxSprite from './box-sprite.png'
 
