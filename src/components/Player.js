@@ -75,6 +75,9 @@ export default class Player extends Component {
     this.moveStage()
     this.props.updatePlayer({ position: body.position, angle: body.angle })
     if(body.position.y > 580) {
+      body.collisionFilter = { mask: 1 }
+    }
+    if(body.position.y > 800) {
       this.props.endGame()
     }
   }
