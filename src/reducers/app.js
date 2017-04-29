@@ -37,10 +37,10 @@ const createLevel = () => {
       platforms: [
         ...level.platforms,
         {
-          args: [450 + Math.random() * 200, level.platforms[0].args[1] - i * 100, width, 10 ]
+          args: [450 + Math.random() * 200, level.platforms[0].args[1] - i * 100, width, 6 ]
         },
         {
-          args: [350 - Math.random() * 200, level.platforms[0].args[1] - i * 100 - 50, width, 10 ]
+          args: [350 - Math.random() * 200, level.platforms[0].args[1] - i * 100 - 50, width, 6 ]
         }
       ]
     }

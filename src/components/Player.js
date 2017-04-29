@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Matter from 'matter-js'
+import Matter, { World, Bodies } from 'matter-js'
 import PropTypes from 'prop-types'
-import { Body } from 'react-game-kit'
 import BoxSprite from './box-sprite.png'
+import Composite from './Composite'
 
 const SPACE = 32
 const CURSOR_LEFT = 37
@@ -23,8 +23,25 @@ export default class Player extends Component {
     setStageLevel: PropTypes.func,
   }
 
+  constructor(props, context) {
+    super(props)
+
+    const { x, y } = props.player.position
+    const angle = props.player.angle
+    const { engine } = context
+
+    this.body = Bodies.rectangle(x, y, 40, 40, {
+      mass: 9,
+      collisionFilter: { group: 1 },
+      friction: 1,
+      frictionAir: 0.05,
+      chamfer: {radius: 2}
+    })
+    World.addBody(engine.world, this.body)
+  }
+
   onKeyDown = e => {
-    const { body } = this.body
+    const body = this.body
     switch(e.which) {
       case SPACE:
         if(this.onGround) {
@@ -49,7 +66,7 @@ export default class Player extends Component {
   }
 
   update = () => {
-    const { body } = this.body
+    const body = this.body
     this.onGround = Math.max((this.onGround || 0) - 1, 0)
     this.move(body)
     this.moveStage()
@@ -60,7 +77,7 @@ export default class Player extends Component {
   }
 
   moveStage = () => {
-    const { body } = this.body
+    const body = this.body
     const { engine, store } = this.context
     const stageLevel = store.getState().app.level.stageLevel
     const stageDY = stageLevel / 2000 + (body.position.y > 200 ? 0 : (200 - body.position.y) / 50)
@@ -87,8 +104,8 @@ export default class Player extends Component {
 
   resting = ({ pairs }) => {
     if (pairs.some(pair => {
-      return (pair.bodyA === this.body.body && pair.bodyA.position.y < pair.bodyB.position.y) ||
-        (pair.bodyB === this.body.body && pair.bodyB.position.y < pair.bodyA.position.y)
+      return (pair.bodyA === this.body && pair.bodyA.position.y < pair.bodyB.position.y) ||
+        (pair.bodyB === this.body && pair.bodyB.position.y < pair.bodyA.position.y)
     })) {
       this.onGround = Math.min((this.onGround || 0) + 3, 10)
     }
@@ -99,9 +116,8 @@ export default class Player extends Component {
     Matter.Events.on(this.context.engine, 'collisionStart', this.resting)
     Matter.Events.on(this.context.engine, 'collisionActive', this.resting)
     document.addEventListener('keydown', this.onKeyDown, false)
-    document.addEventListener('keyup', this.onKeyUp, false)
 
-    this.body.body.render.sprite = {
+    this.body.render.sprite = {
       texture: BoxSprite,
       xOffset: 0.5,
       yOffset: 0.5,
@@ -115,7 +131,7 @@ export default class Player extends Component {
     Matter.Events.off(this.context.engine, 'collisionStart', this.resting)
     Matter.Events.off(this.context.engine, 'collisionActive', this.resting)
     document.removeEventListener('keydown', this.onKeyDown, false)
-    document.removeEventListener('keyup', this.onKeyUp, false)
+    World.remove(this.context.engine.world, this.body);
   }
 
   wrapperStyles() {
@@ -132,34 +148,9 @@ export default class Player extends Component {
     }
   }
 
-  imageStyles() {
-    return {
-      position: 'absolute',
-      width: '100%',
-      height: '100%'
-    }
-  }
-
   render() {
-    const { x, y } = this.props.player.position
-    const angle = this.props.player.angle
-
     return (
-      <div
-        style={this.wrapperStyles()}
-      >
-        <Body
-          args={[x, y, 40, 40]}
-          ref={(b) => { this.body = b; }}
-          mass={9}
-          collisionFilter={{ group: 1 }}
-          friction={1}
-          frictionAir={0.05}
-          chamfer={{radius: 2}}
-        >
-          <span></span>
-        </Body>
-      </div>
+      <div style={this.wrapperStyles()}></div>
     )
   }
 }

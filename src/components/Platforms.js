@@ -12,7 +12,7 @@ const Platforms = ({
         args={platform.args}
         collisionFilter={{ group: 1}}
         isStatic
-        chamfer={{radius: 5}}
+        chamfer={{radius: 2}}
         friction={1}
         >
           <span></span>
