@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import Matter, { World, Bodies } from 'matter-js'
+import Matter, { World, Bodies, Body, Composite } from 'matter-js'
 import PropTypes from 'prop-types'
 import BoxSprite from './box-sprite.png'
+import EyesSprite from './eyes.png'
 
 const SPACE = 32
 const CURSOR_LEFT = 37
@@ -26,17 +27,23 @@ export default class Player extends Component {
     super(props)
 
     const { x, y } = props.player.position
-    const angle = props.player.angle
     const { engine } = context
 
     this.body = Bodies.rectangle(x, y, 40, 40, {
-      mass: 9,
-      angle,
-      collisionFilter: { group: 1 },
+      chamfer: {radius: 2},
+      frictionAir: 0.045,
       friction: 1,
-      frictionAir: 0.05,
-      chamfer: {radius: 2}
+      mass: 8,
     })
+
+    this.body.render.sprite = {
+      texture: BoxSprite,
+      xOffset: 0.5,
+      yOffset: 0.5,
+      xScale: 0.5,
+      yScale: 0.5,
+    }
+
     World.addBody(engine.world, this.body)
   }
 
@@ -112,14 +119,6 @@ export default class Player extends Component {
     Matter.Events.on(this.context.engine, 'collisionStart', this.resting)
     Matter.Events.on(this.context.engine, 'collisionActive', this.resting)
     document.addEventListener('keydown', this.onKeyDown, false)
-
-    this.body.render.sprite = {
-      texture: BoxSprite,
-      xOffset: 0.5,
-      yOffset: 0.5,
-      xScale: 0.5,
-      yScale: 0.5,
-    }
   }
 
   componentWillUnmount() {
