@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Loop, Stage } from 'react-game-kit'
 import PropTypes from 'prop-types'
-import World from '../containers/World'
+import World from './World'
 import Score from '../containers/Score'
 import { INITIAL, GAME_OVER } from '../actions'
-
 import './App.css'
 
 const dimensions = {

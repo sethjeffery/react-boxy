@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import Matter from 'matter-js'
 import PropTypes from 'prop-types'
 
-import './App.css'
-
-export default class World extends Component {
+export default class Render extends Component {
   static defaultProps = {
     width: 800,
     height: 600
@@ -15,17 +13,17 @@ export default class World extends Component {
   }
 
   componentDidMount() {
-    this.render = Matter.Render.create({
+    this.matterRender = Matter.Render.create({
       element: this.el,
       engine: this.context.engine,
       options: this.props
     })
 
-    Matter.Render.run(this.render)
+    Matter.Render.run(this.matterRender)
   }
 
   componentWillUnmount() {
-    Matter.Render.stop(this.render)
+    Matter.Render.stop(this.matterRender)
   }
 
   render() {

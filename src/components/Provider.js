@@ -4,7 +4,15 @@ import { Provider as ReduxProvider } from 'react-redux'
 import reducers from '../reducers'
 import PropTypes from 'prop-types'
 
-class Provider extends Component {
+export default class Provider extends Component {
+  static defaultProps = {
+    store: createStore(reducers)
+  }
+
+  static propTypes = {
+    store: PropTypes.object.isRequired
+  }
+
   render() {
     return (
       <ReduxProvider store={this.props.store}>
@@ -13,13 +21,3 @@ class Provider extends Component {
     )
   }
 }
-
-Provider.defaultProps = {
-  store: createStore(reducers)
-}
-
-Provider.propTypes = {
-  store: PropTypes.object.isRequired
-}
-
-export default Provider

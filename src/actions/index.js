@@ -2,7 +2,6 @@ export const TURN_LEFT = 'TURN_LEFT'
 export const TURN_RIGHT = 'TURN_RIGHT'
 export const KEY_UP = 'KEY_UP'
 export const KEY_DOWN = 'KEY_DOWN'
-export const TICK = 'TICK'
 export const UPDATE_PLAYER = 'UPDATE_PLAYER'
 export const SET_STAGE_LEVEL = 'SET_STAGE_LEVEL'
 export const START_GAME = 'START_GAME'
@@ -20,12 +19,6 @@ export const turnLeft = () => {
 export const turnRight = () => {
   return {
     type: TURN_RIGHT
-  }
-}
-
-export const tick = () => {
-  return {
-    type: TICK
   }
 }
 

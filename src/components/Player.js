@@ -129,8 +129,6 @@ export default class Player extends Component {
   }
 
   render() {
-    return (
-      <span></span>
-    )
+    return <span></span>
   }
 }
