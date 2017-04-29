@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Loop, Stage } from 'react-game-kit'
 import PropTypes from 'prop-types'
-import Matter from 'matter-js'
 import World from '../containers/World'
 import Score from '../containers/Score'
-import { INITIAL, PLAYING, GAME_OVER } from '../actions'
+import { INITIAL, GAME_OVER } from '../actions'
 
 import './App.css'
 
@@ -14,6 +13,11 @@ const dimensions = {
 }
 
 export default class App extends Component {
+  static propTypes = {
+    startGame: PropTypes.func,
+    gameState: PropTypes.string
+  }
+
   render() {
     switch(this.props.gameState) {
       case INITIAL:

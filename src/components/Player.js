@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Matter from 'matter-js'
 import PropTypes from 'prop-types'
-import { Body, Sprite } from 'react-game-kit'
+import { Body } from 'react-game-kit'
 import BoxSprite from './box-sprite.png'
 
 const SPACE = 32
@@ -13,6 +13,14 @@ export default class Player extends Component {
     engine: PropTypes.object,
     scale: PropTypes.number,
     store: PropTypes.object
+  }
+
+  static propTypes = {
+    player: PropTypes.object,
+    pressing: PropTypes.object,
+    updatePlayer: PropTypes.func,
+    endGame: PropTypes.func,
+    setStageLevel: PropTypes.func,
   }
 
   onKeyDown = e => {
@@ -79,8 +87,8 @@ export default class Player extends Component {
 
   resting = ({ pairs }) => {
     if (pairs.some(pair => {
-      return (pair.bodyA == this.body.body && pair.bodyA.position.y < pair.bodyB.position.y) ||
-        (pair.bodyB == this.body.body && pair.bodyB.position.y < pair.bodyA.position.y)
+      return (pair.bodyA === this.body.body && pair.bodyA.position.y < pair.bodyB.position.y) ||
+        (pair.bodyB === this.body.body && pair.bodyB.position.y < pair.bodyA.position.y)
     })) {
       this.onGround = Math.min((this.onGround || 0) + 3, 10)
     }
@@ -113,7 +121,6 @@ export default class Player extends Component {
   wrapperStyles() {
     const { x, y } = this.props.player.position
     const angle = 0
-    window.body = this.body
 
     return {
       position: 'absolute',

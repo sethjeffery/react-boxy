@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Body, World as MatterWorld } from 'react-game-kit'
+import { World as MatterWorld } from 'react-game-kit'
 import PropTypes from 'prop-types'
 import Player from '../containers/Player'
 import Matter from 'matter-js'
