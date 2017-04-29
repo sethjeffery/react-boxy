@@ -3,11 +3,18 @@
   text-align: center;
 }
 
+#world {
+  width: 800px;
+  height: 600px;
+  position: absolute;
+}
+
 .canvas, canvas {
   width: 800px;
   height: 600px;
   border-radius: 4px;
-  background-color: #222;
+  background-color: #f8f8f8;
+  color: #2e2b44;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -21,17 +28,12 @@
 .info {
   text-align: center;
   margin: 1rem 0;
-  color: white;
-}
-
-#Game > div {
-  display: none;
 }
 
 button {
   background-color: transparent;
-  border: solid 2px white;
-  color: white;
+  border: solid 2px #2e2b44;
+  color: #2e2b44;
   border-radius: 4px;
   font: 18px sans-serif;
   text-transform: uppercase;
@@ -41,5 +43,5 @@ button {
 }
 
 button:hover, button:focus {
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(0,0,0,0.1);
 }

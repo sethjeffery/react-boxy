@@ -15,7 +15,6 @@ const dimensions = {
 
 export default class App extends Component {
   render() {
-    console.log(this.props)
     switch(this.props.gameState) {
       case INITIAL:
         return (
@@ -29,8 +28,8 @@ export default class App extends Component {
             <div className='info'>
               Game over, man.
             </div>
-            <Score />
             <button onClick={this.props.startGame}>TRY AGAIN</button>
+            <Score />
           </div>
         )
       default:
@@ -41,7 +40,7 @@ export default class App extends Component {
                 Cursor keys to move. SPACE to jump.
               </div>
               <div style={dimensions} id="Game">
-                <Stage>
+                <Stage width={800} height={600}>
                   <World />
                 </Stage>
               </div>

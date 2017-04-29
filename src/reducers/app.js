@@ -16,33 +16,34 @@ import {
 const playerDefault = {
   position: {
     x: 400,
-    y: 299
+    y: 499
   },
-  angle: 0,
-  isJumping: false
+  angle: 0
 }
 
 const initialLevel = {
   stageLevel: 0,
   platforms: [{
-    id: 0,
-    args: [400, 350, 500, 50]
+    args: [400, 550, 500, 50]
   }]
 }
 
 const createLevel = () => {
   let level = { ...initialLevel }
   for(let i=1; i<50; i++) {
-    const x = (i == 0 ? 0 : Math.random() * 200)
     const width = 100 + Math.random() * 100
-    level.platforms.push({
-      id: i*2,
-      args: [450 + (i == 0 ? 0 : Math.random() * 200), level.platforms[0].args[1] - i * 100, width, 10 ]
-    })
-    level.platforms.push({
-      id: i*2+1,
-      args: [350 - (i == 0 ? 0 : Math.random() * 200), level.platforms[0].args[1] - i * 100 - 50, width, 10 ]
-    })
+    level = {
+      ...level,
+      platforms: [
+        ...level.platforms,
+        {
+          args: [450 + (i == 0 ? 0 : Math.random() * 200), level.platforms[0].args[1] - i * 100, width, 10 ]
+        },
+        {
+          args: [350 - (i == 0 ? 0 : Math.random() * 200), level.platforms[0].args[1] - i * 100 - 50, width, 10 ]
+        }
+      ]
+    }
   }
   return level
 }

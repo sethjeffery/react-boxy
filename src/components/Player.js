@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Matter from 'matter-js'
 import PropTypes from 'prop-types'
-import { Body } from 'react-game-kit'
+import { Body, Sprite } from 'react-game-kit'
+import BoxSprite from './box-sprite.png'
 
 const SPACE = 32
 const CURSOR_LEFT = 37
@@ -41,12 +42,11 @@ export default class Player extends Component {
 
   update = () => {
     const { body } = this.body
-    const { engine } = this.context
     this.onGround = Math.max((this.onGround || 0) - 1, 0)
     this.move(body)
     this.moveStage()
     this.props.updatePlayer({ position: body.position, angle: body.angle })
-    if(body.position.y > 600) {
+    if(body.position.y > 580) {
       this.props.endGame()
     }
   }
@@ -55,7 +55,7 @@ export default class Player extends Component {
     const { body } = this.body
     const { engine, store } = this.context
     const stageLevel = store.getState().app.level.stageLevel
-    const stageDY = stageLevel / 2000 + .2 + (body.position.y > 200 ? 0 : (200 - body.position.y) / 50)
+    const stageDY = stageLevel / 2000 + (body.position.y > 200 ? 0 : (200 - body.position.y) / 50)
     this.props.setStageLevel(stageLevel + stageDY)
     Matter.Composite.translate(engine.world, { x: 0, y: stageDY })
   }
@@ -90,25 +90,46 @@ export default class Player extends Component {
     Matter.Events.on(this.context.engine, 'afterUpdate', this.update)
     Matter.Events.on(this.context.engine, 'collisionStart', this.resting)
     Matter.Events.on(this.context.engine, 'collisionActive', this.resting)
-    document.addEventListener('keydown', e => this.onKeyDown(e), false)
-    document.addEventListener('keyup', e => this.onKeyUp(e), false)
+    document.addEventListener('keydown', this.onKeyDown, false)
+    document.addEventListener('keyup', this.onKeyUp, false)
+
+    this.body.body.render.sprite = {
+      texture: BoxSprite,
+      xOffset: 0.5,
+      yOffset: 0.5,
+      xScale: 0.5,
+      yScale: 0.5,
+    }
   }
 
   componentWillUnmount() {
     Matter.Events.off(this.context.engine, 'afterUpdate', this.update);
     Matter.Events.off(this.context.engine, 'collisionStart', this.resting)
     Matter.Events.off(this.context.engine, 'collisionActive', this.resting)
-    document.removeEventListener('keydown', e => this.onKeyDown(e), false)
-    document.removeEventListener('keyup', e => this.onKeyUp(e), false)
+    document.removeEventListener('keydown', this.onKeyDown, false)
+    document.removeEventListener('keyup', this.onKeyUp, false)
   }
 
-  wrapperStyles({ x, y, angle }) {
+  wrapperStyles() {
+    const { x, y } = this.props.player.position
+    const angle = 0
+    window.body = this.body
+
     return {
       position: 'absolute',
-      width: '50px',
-      height: '50px',
+      width: '40px',
+      height: '40px',
+      margin: '-20px',
       transform: `translateX(${x}px) translateY(${y}px) rotate(${angle}deg)`,
       transformOrigin: 'center'
+    }
+  }
+
+  imageStyles() {
+    return {
+      position: 'absolute',
+      width: '100%',
+      height: '100%'
     }
   }
 
@@ -117,17 +138,21 @@ export default class Player extends Component {
     const angle = this.props.player.angle
 
     return (
-      <Body
-        args={[x, y, 40, 40]}
-        ref={(b) => { this.body = b; }}
-        mass={9}
-        collisionFilter={{ group: 1 }}
-        friction={1}
-        frictionAir={0.05}
-        chamfer={{radius: 5}}
+      <div
+        style={this.wrapperStyles()}
       >
-        <div className='Player'></div>
-      </Body>
+        <Body
+          args={[x, y, 40, 40]}
+          ref={(b) => { this.body = b; }}
+          mass={9}
+          collisionFilter={{ group: 1 }}
+          friction={1}
+          frictionAir={0.05}
+          chamfer={{radius: 2}}
+        >
+          <span></span>
+        </Body>
+      </div>
     )
   }
 }
