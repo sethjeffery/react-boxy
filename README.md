@@ -1,5 +1,7 @@
 # Boxy!
 
+https://react-boxy.herokuapp.com/
+
 Boxy is a simple platform physics game using [React Game Kit](https://github.com/FormidableLabs/react-game-kit).
 
 ## How to run
