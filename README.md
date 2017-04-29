@@ -1,16 +1,9 @@
-# React Todo
+# Boxy!
 
-A simple app for creating a TODO list using React + Redux, with a router. Skinned using Material-UI.
+Boxy is a simple platform physics game using [React Game Kit](https://github.com/FormidableLabs/react-game-kit).
 
-## Dependencies
+The aim of the game is to get Boxy as high as possible by jumping from platform to platform, without falling off the bottom of the screen.
 
-```
-npm i -g yarn
-```
+Left and right arrow keys roll. SPACE bar jumps.
 
-## Running the project
-
-- Get the latest version
-- `yarn start`
-
-![image](https://cloud.githubusercontent.com/assets/1628558/25374834/cff6dd6c-2996-11e7-98cd-a2a36193474e.png)
+Have fun!
