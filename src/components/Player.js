@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Matter, { World, Bodies, Body, Composite } from 'matter-js'
 import PropTypes from 'prop-types'
 import BoxSprite from './box-sprite.png'
-import EyesSprite from './eyes.png'
 
 const SPACE = 32
 const CURSOR_LEFT = 37
